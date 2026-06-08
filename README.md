@@ -1,5 +1,11 @@
 # AI FILTER (Ailter)
 
+> 🔗 **라이브:** https://s-gahyeon.github.io/ai-filter/
+>
+> 📱 **모바일 설치(QR):** 아래 QR을 스캔 → 브라우저에서 열고 "홈 화면에 추가"
+>
+> <img src="public/qr.png" width="180" alt="AI FILTER 다운로드 QR" />
+
 청소년을 위한 **AI 콘텐츠 신뢰 판단** PWA. URL·스크린샷·텍스트를 넣으면 **AI 생성 여부**와 **신뢰도 3단계(안전·주의·위험)** 를 즉시 보여줍니다. 로그인 불필요, 기록은 브라우저 로컬에만 저장됩니다.
 
 > 기획(MAP_분석.md)·기술스택(AI_FILTER_기술스택.md) 문서와 `APP/` 프로토타입(디자인 토큰·마스코트)을 그대로 이식했습니다.
