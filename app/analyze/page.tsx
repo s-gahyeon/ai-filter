@@ -6,7 +6,8 @@ import { Mascot } from "@/components/Brand";
 import { ScreenHeader, PrimaryBtn } from "@/components/ui";
 import { LinkIcon, ImageIcon } from "@/components/icons";
 import { addHistory } from "@/lib/storage";
-import type { AnalysisResult, AnalyzeRequest } from "@/lib/types";
+import { analyze } from "@/lib/analyze";
+import type { AnalyzeRequest } from "@/lib/types";
 
 type Tab = "url" | "image" | "text";
 const TABS: { id: Tab; label: string }[] = [
@@ -53,16 +54,8 @@ function AnalyzeInner() {
           ? { inputType: "image", imageBase64: image!.dataUrl, fileName: image!.name }
           : { inputType: "text", text: text.trim() };
     try {
-      const res = await fetch("/api/analyze", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
-      });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data?.error || "분석에 실패했어요.");
-      const result = data as AnalysisResult;
-      // UX: 분석 중 화면이 너무 빨리 사라지지 않게 살짝 대기
-      await new Promise((r) => setTimeout(r, 600));
+      // 클라이언트 사이드 분석 (목업 우선). 정적 호스팅에서도 동작.
+      const [result] = await Promise.all([analyze(body), new Promise((r) => setTimeout(r, 700))]);
       addHistory(result);
       router.replace(`/result?id=${result.id}`);
     } catch (e) {

@@ -51,6 +51,16 @@ cp .env.local.example .env.local
 - `OPENAI_API_KEY` 있으면 → `engine: openai:<model>`
 - 없으면 → `engine: mock`
 
+## 배포 (GitHub Pages)
+
+`main`에 푸시하면 GitHub Actions가 정적 export(`npm run build:pages`)를 빌드해 **GitHub Pages**로 자동 배포합니다.
+
+- 배포 URL: **https://s-gahyeon.github.io/ai-filter/**
+- 워크플로: [.github/workflows/deploy.yml](.github/workflows/deploy.yml)
+- 서브경로(`/ai-filter`) 배포를 위해 `NEXT_PUBLIC_BASE_PATH`로 basePath를 주입합니다.
+
+> 정적 호스팅이라 분석은 **클라이언트 사이드 목업**으로 동작합니다. 서버 기반 OpenAI 연동이 필요하면 `lib/analyze.ts`를 API Route로 옮겨 **Vercel**에 배포하세요(`vercel` 임포트 후 환경변수 `OPENAI_API_KEY` 등록).
+
 ## PWA
 
 - `public/manifest.json` (이름·아이콘·테마컬러 `#FF3C38`·Share Target)

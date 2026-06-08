@@ -9,6 +9,7 @@ import { ChevronRight, WarnTriangle } from "@/components/icons";
 import { isOnboarded, getHistory, getSettings, saveSettings } from "@/lib/storage";
 import type { AnalysisResult } from "@/lib/types";
 import { timeAgo } from "@/lib/format";
+import { asset } from "@/lib/base";
 
 const SNS_COLORS: Record<string, string> = {
   Instagram: "#E1306C",
@@ -103,7 +104,7 @@ export default function HomePage() {
           </div>
           <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
             <div style={{ width: 48, height: 48, borderRadius: 8, backgroundColor: C.gray200, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-              <img src="/assets/ar_on_you.svg" width={22} height={22} style={{ opacity: 0.65 }} alt="" />
+              <img src={asset("/assets/ar_on_you.svg")} width={22} height={22} style={{ opacity: 0.65 }} alt="" />
             </div>
             <div style={{ minWidth: 0 }}>
               <p style={{ fontFamily: FONT, fontSize: 12, color: C.gray400, letterSpacing: "-0.02em", marginBottom: 3 }}>{aiOn ? "AI 감지 활성화" : "AI 감지 비활성화"}</p>
@@ -186,8 +187,8 @@ export default function HomePage() {
           </div>
           <div style={{ display: "flex", gap: 12 }}>
             {[
-              { icon: "/assets/wand_stars.svg", label: "AI 피부 표현\n특징 확인" },
-              { icon: "/assets/imagesmode.svg", label: "AI 이미지\n패턴 분석" },
+              { icon: asset("/assets/wand_stars.svg"), label: "AI 피부 표현\n특징 확인" },
+              { icon: asset("/assets/imagesmode.svg"), label: "AI 이미지\n패턴 분석" },
             ].map(({ icon, label }) => (
               <Link key={label} href="/learn" style={{ textDecoration: "none", flex: 1, borderRadius: 12, backgroundColor: C.white, boxShadow: "0 0 20px rgba(0,0,0,0.02)", border: `1px solid ${C.gray200}`, padding: 16 }}>
                 <div style={{ width: 48, height: 48, borderRadius: 8, backgroundColor: C.primaryLight, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 10 }}>

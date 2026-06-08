@@ -1,18 +1,19 @@
 import type { Metadata, Viewport } from "next";
+import { asset } from "@/lib/base";
 import "./globals.css";
 
 export const metadata: Metadata = {
   title: "AI FILTER — 청소년 AI 콘텐츠 신뢰 판단",
   description: "URL·스크린샷을 넣으면 AI 생성 여부와 신뢰도를 3단계로 즉시 알려주는 청소년용 서비스",
-  manifest: "/manifest.json",
+  manifest: asset("/manifest.json"),
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
     title: "AI FILTER",
   },
   icons: {
-    icon: "/icons/icon.svg",
-    apple: "/icons/icon-192.png",
+    icon: asset("/icons/icon.svg"),
+    apple: asset("/icons/icon-192.png"),
   },
 };
 

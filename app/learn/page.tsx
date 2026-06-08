@@ -2,12 +2,13 @@
 import { useState } from "react";
 import { C, FONT } from "@/lib/tokens";
 import { AppShell, PrimaryBtn } from "@/components/ui";
+import { asset } from "@/lib/base";
 
 const GUIDES = [
-  { icon: "/assets/wand_stars.svg", title: "AI 피부·손 표현 확인", desc: "AI 이미지는 피부가 지나치게 매끄럽거나 손가락 개수·관절이 어색한 경우가 많아요." },
-  { icon: "/assets/imagesmode.svg", title: "배경 패턴 분석", desc: "글자가 뭉개지거나 배경이 반복·왜곡되면 AI 생성일 가능성이 높아요." },
-  { icon: "/assets/ar_on_you.svg", title: "딥페이크 경계 확인", desc: "얼굴 경계, 머리카락, 빛 반사가 부자연스러운지 살펴보세요." },
-  { icon: "/assets/error-b.svg", title: "출처·교차검증", desc: "반응(조회수·댓글)만 믿지 말고 원 출처와 다른 매체를 함께 확인하세요." },
+  { icon: asset("/assets/wand_stars.svg"), title: "AI 피부·손 표현 확인", desc: "AI 이미지는 피부가 지나치게 매끄럽거나 손가락 개수·관절이 어색한 경우가 많아요." },
+  { icon: asset("/assets/imagesmode.svg"), title: "배경 패턴 분석", desc: "글자가 뭉개지거나 배경이 반복·왜곡되면 AI 생성일 가능성이 높아요." },
+  { icon: asset("/assets/ar_on_you.svg"), title: "딥페이크 경계 확인", desc: "얼굴 경계, 머리카락, 빛 반사가 부자연스러운지 살펴보세요." },
+  { icon: asset("/assets/error-b.svg"), title: "출처·교차검증", desc: "반응(조회수·댓글)만 믿지 말고 원 출처와 다른 매체를 함께 확인하세요." },
 ];
 
 const QUIZ = [
