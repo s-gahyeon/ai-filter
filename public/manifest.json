@@ -1,0 +1,24 @@
+{
+  "name": "AI FILTER — 청소년 AI 콘텐츠 신뢰 판단",
+  "short_name": "AI FILTER",
+  "description": "URL·스크린샷으로 AI 생성 여부와 신뢰도를 3단계로 즉시 판단하는 청소년용 서비스",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F9FAFB",
+  "theme_color": "#FF3C38",
+  "lang": "ko",
+  "categories": ["education", "utilities"],
+  "icons": [
+    { "src": "/icons/icon.svg", "sizes": "any", "type": "image/svg+xml" },
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "share_target": {
+    "action": "/analyze",
+    "method": "GET",
+    "params": { "text": "text", "url": "url", "title": "title" }
+  }
+}

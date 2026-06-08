@@ -1,0 +1,171 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==========================================================
+   Ailter / AI FILTER — Design Tokens
+   피그마 "디자인 완료" 섹션 기반 CSS Custom Properties
+   ========================================================== */
+:root {
+  /* ── COLOR: PRIMARY (Red Scale) ───────────────────────── */
+  --color-primary-100: #ffd8d7;
+  --color-primary-200: #ffb1af;
+  --color-primary-300: #ff8a88;
+  --color-primary-400: #ff6360;
+  --color-primary-500: #ff3c38; /* Main primary */
+  --color-primary-600: #cf302d;
+  --color-primary-700: #9f2422;
+  --color-primary-800: #6f1816;
+  --color-primary-900: #3f0c0b;
+
+  --color-primary: var(--color-primary-500);
+  --color-primary-hover: var(--color-primary-600);
+  --color-primary-light: #fff8f8;
+  --color-primary-border: var(--color-primary-100);
+
+  /* ── COLOR: GRAY Scale ─────────────────────────────────── */
+  --color-gray-100: #f9fafb;
+  --color-gray-200: #e9ebef;
+  --color-gray-300: #c5c6cd;
+  --color-gray-400: #999ba5;
+  --color-gray-500: #6f717c;
+  --color-black: #1e1e1e;
+  --color-white: #ffffff;
+
+  /* ── COLOR: SEMANTIC ───────────────────────────────────── */
+  --color-warning: #ff9900;
+  --color-info: #009eff;
+  --color-danger: var(--color-primary-500);
+  --color-success: #80efc5;
+
+  /* ── COLOR: BRAND (Social) ─────────────────────────────── */
+  --color-kakao: #fee500;
+  --color-kakao-fg: #3c1e1e;
+  --color-google: #ffffff;
+  --color-apple: var(--color-gray-100);
+
+  /* ── TYPOGRAPHY ────────────────────────────────────────── */
+  --font-primary: "Pretendard Variable", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: "Wanted Sans", "Pretendard Variable", -apple-system, sans-serif;
+  --font-mono: "SF Mono", "Fira Code", monospace;
+
+  --text-xs: 10px;
+  --text-sm: 12px;
+  --text-md: 13px;
+  --text-base: 14px;
+  --text-lg: 15px;
+  --text-xl: 16px;
+  --text-2xl: 18px;
+  --text-3xl: 20px;
+  --text-4xl: 22px;
+  --text-5xl: 24px;
+  --text-display: 52px;
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --weight-extrabold: 800;
+
+  --leading-none: 1;
+  --leading-tight: 1.3;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.6;
+
+  --tracking-display: -0.04em;
+  --tracking-tight: -0.02em;
+  --tracking-normal: -0.01em;
+
+  /* ── SPACING ───────────────────────────────────────────── */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-14: 56px;
+
+  /* ── BORDER RADIUS ─────────────────────────────────────── */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
+  --radius-full: 9999px;
+
+  /* ── SHADOWS ───────────────────────────────────────────── */
+  --shadow-card: 0 0 20px rgba(0, 0, 0, 0.02);
+  --shadow-overlay: 0 0 20px rgba(0, 0, 0, 0.04);
+  --shadow-modal: 0 40px 80px rgba(0, 0, 0, 0.18);
+  --shadow-btn: 0 1px 3px rgba(0, 0, 0, 0.2);
+
+  /* ── BORDER ─────────────────────────────────────────────── */
+  --border-default: 1px solid var(--color-gray-200);
+  --border-primary: 1px solid var(--color-primary);
+  --border-focus: 1.5px solid var(--color-primary);
+
+  /* ── COMPONENT: Button ─────────────────────────────────── */
+  --btn-height-lg: 56px;
+  --btn-height-sm: 40px;
+  --btn-radius: var(--radius-lg);
+  --btn-font-size: var(--text-xl);
+  --btn-font-weight: var(--weight-medium);
+
+  /* ── COMPONENT: Header ─────────────────────────────────── */
+  --header-height: 60px;
+  --header-padding-x: var(--space-5);
+
+  /* ── COMPONENT: Navigation ─────────────────────────────── */
+  --nav-height: 80px;
+  --nav-blur: blur(14px);
+  --nav-bg: rgba(255, 255, 255, 0.88);
+
+  /* ── COMPONENT: Card ───────────────────────────────────── */
+  --card-bg: var(--color-white);
+  --card-radius: var(--radius-lg);
+  --card-border: 1px solid var(--color-gray-200);
+  --card-shadow: var(--shadow-card);
+  --card-padding: var(--space-4);
+
+  /* ── LAYOUT ─────────────────────────────────────────────── */
+  --screen-bg: var(--color-gray-100);
+  --status-bar-h: 62px;
+  --screen-padding: var(--space-5);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-primary);
+  background: var(--color-gray-100);
+  color: var(--color-black);
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  font-family: var(--font-primary);
+}
+
+/* hide scrollbars for app-like feel */
+.ailter-scroll::-webkit-scrollbar {
+  display: none;
+}
+.ailter-scroll {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
