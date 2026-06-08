@@ -48,6 +48,7 @@ export default function OnboardingPage() {
   const [age, setAge] = useState<string | null>(null);
   const [allAgree, setAllAgree] = useState(false);
   const [perms, setPerms] = useState({ sns: false, stor: false });
+  const [wiggle, setWiggle] = useState(false);
 
   const nav = (to: Step, explicit?: "fwd" | "back") => {
     setDir(explicit ?? (FLOW.indexOf(to) >= FLOW.indexOf(cur) ? "fwd" : "back"));
@@ -89,16 +90,38 @@ export default function OnboardingPage() {
         {cur === "splash" && (
           <div style={{ height: "100%", backgroundColor: C.gray100, display: "flex", flexDirection: "column", paddingTop: 40 }}>
             <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 24 }}>
-              <Mascot size={156} />
-              <div style={{ textAlign: "center" }}>
+              {/* 마스코트: 둥실 떠다니다가, 탭하면 까딱 반응 */}
+              <button
+                onClick={() => {
+                  setWiggle(false);
+                  requestAnimationFrame(() => setWiggle(true));
+                }}
+                aria-label="마스코트"
+                style={{ border: "none", background: "none", cursor: "pointer", padding: 0 }}
+              >
+                <span
+                  className={wiggle ? "ailter-wiggle" : "ailter-float"}
+                  style={{ display: "inline-block" }}
+                  onAnimationEnd={() => setWiggle(false)}
+                >
+                  <Mascot size={156} />
+                </span>
+              </button>
+              <div className="ailter-fade-up" style={{ textAlign: "center", animationDelay: "0.1s" }}>
                 <AilterLogo size={54} />
                 <p style={{ ...sub, marginTop: 10 }}>청소년을 위한 AI 콘텐츠 신뢰 판단 서비스</p>
               </div>
             </div>
             <div style={{ padding: "0 20px 36px", display: "flex", flexDirection: "column", gap: 12 }}>
-              <SocialBtn bg={C.kakao} fg={C.kakaoFg} icon={<KakaoIcon />} label="카카오로 시작하기" onClick={() => nav("age")} />
-              <SocialBtn bg={C.white} border icon={<GoogleIcon />} label="구글로 시작하기" onClick={() => nav("age")} />
-              <SocialBtn bg={C.gray100} border icon={<AppleIcon />} label="애플로 시작하기" onClick={() => nav("age")} />
+              <div className="ailter-fade-up" style={{ animationDelay: "0.18s" }}>
+                <SocialBtn bg={C.kakao} fg={C.kakaoFg} icon={<KakaoIcon />} label="카카오로 시작하기" onClick={() => nav("age")} />
+              </div>
+              <div className="ailter-fade-up" style={{ animationDelay: "0.26s" }}>
+                <SocialBtn bg={C.white} border icon={<GoogleIcon />} label="구글로 시작하기" onClick={() => nav("age")} />
+              </div>
+              <div className="ailter-fade-up" style={{ animationDelay: "0.34s" }}>
+                <SocialBtn bg={C.gray100} border icon={<AppleIcon />} label="애플로 시작하기" onClick={() => nav("age")} />
+              </div>
             </div>
           </div>
         )}
@@ -228,6 +251,15 @@ export default function OnboardingPage() {
   );
 }
 
+function Spinner({ color }: { color: string }) {
+  return (
+    <svg className="ailter-spin" width="18" height="18" viewBox="0 0 18 18" fill="none">
+      <circle cx="9" cy="9" r="7" stroke={color} strokeOpacity="0.25" strokeWidth="2.5" />
+      <path d="M9 2a7 7 0 0 1 7 7" stroke={color} strokeWidth="2.5" strokeLinecap="round" />
+    </svg>
+  );
+}
+
 function SocialBtn({
   bg,
   fg = C.black,
@@ -243,16 +275,30 @@ function SocialBtn({
   label: string;
   onClick: () => void;
 }) {
+  const [pressed, setPressed] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const handle = () => {
+    if (loading) return;
+    setLoading(true);
+    // "연결 중" 피드백을 잠깐 보여준 뒤 다음 화면으로
+    setTimeout(onClick, 650);
+  };
+
   return (
     <button
-      onClick={onClick}
+      onClick={handle}
+      onPointerDown={() => setPressed(true)}
+      onPointerUp={() => setPressed(false)}
+      onPointerLeave={() => setPressed(false)}
+      disabled={loading}
       style={{
         width: "100%",
         height: 56,
         borderRadius: 12,
         backgroundColor: bg,
         border: border ? `1.5px solid ${C.gray200}` : "none",
-        cursor: "pointer",
+        cursor: loading ? "default" : "pointer",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -262,9 +308,26 @@ function SocialBtn({
         fontSize: 16,
         color: fg,
         letterSpacing: "-0.02em",
+        transform: pressed ? "scale(0.97)" : "scale(1)",
+        filter: pressed ? "brightness(0.96)" : "none",
+        boxShadow: pressed ? "0 1px 2px rgba(0,0,0,0.10)" : "0 1px 3px rgba(0,0,0,0.04)",
+        transition: "transform 0.12s ease, filter 0.12s ease, box-shadow 0.12s ease",
       }}
     >
-      {icon} {label}
+      <span
+        style={{
+          display: "inline-flex",
+          alignItems: "center",
+          justifyContent: "center",
+          width: 20,
+          height: 20,
+          transform: pressed ? "scale(0.88)" : "scale(1)",
+          transition: "transform 0.12s ease",
+        }}
+      >
+        {loading ? <Spinner color={fg} /> : icon}
+      </span>
+      {loading ? "연결 중..." : label}
     </button>
   );
 }
